@@ -12,13 +12,11 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 ERROR_TEXT = 'Эх, а обещали ведь котика показать... Плак!'
 
 offset = -2
-counter = 0
 cat_response: requests.Response
 cat_link: str
 
 
-while counter < 100:
-    print('Котик номер : ', counter)
+while True:
     updates = requests.get(f'{API_URL}{BOT_TOKEN}/getUpdates?offset={offset + 1}').json()
 
     if updates['result']:
@@ -33,4 +31,3 @@ while counter < 100:
                 requests.get(f'{API_URL}{BOT_TOKEN}/sendMessage?chat_id={chat_id}&text={ERROR_TEXT}')
 
     time.sleep(1)
-    counter += 1
